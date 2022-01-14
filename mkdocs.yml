@@ -1,0 +1,55 @@
+site_name: 算法库
+site_url: https://therehello.top/
+site_author: There Hello
+
+theme:
+  name: material
+  language: zh 
+  font:
+    text: Noto Serif SC
+    code: JetBrains Mono
+  favicon: https://cdn.jsdelivr.net/gh/removeif/removeif-demo@latest/img/favicon.png
+  include_search_page: false
+  search_index_only: true
+  features:
+    - navigation.tabs
+    - navigation.indexes
+    - navigation.top
+    - content.code.annotate
+    - search.highlight
+
+copyright: '版权所有 © 2022 - 2022 There Hello'
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/therehello
+
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      linenums: true
+      linenums_style: pymdownx-inline
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+
+
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - 简介: 
+    - index.md
+  - 图论: 
+    - 树上问题: 
+      - 最近公共祖先: lca.md
