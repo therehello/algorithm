@@ -1,6 +1,9 @@
 site_name: 算法库
-site_url: https://therehello.top/
+site_url: https://algorithm.therehello.top/
 site_author: There Hello
+
+repo_name: therehello/algorithm
+repo_url: https://github.com/therehello/algorithm
 
 theme:
   name: material
