@@ -1,6 +1,6 @@
 # 最近公共祖先
 
-## 平常在信息学竞赛中求LCA一般有四种办法
+**平常在算法竞赛中求LCA一般有四种方法**
 
 - 倍增法求解，预处理复杂度是 $O(nlog⁡n)$ ,每次询问的复杂度是 $O(log⁡n)$。
 
@@ -10,11 +10,11 @@
 
 - 利用树链剖分求解，复杂度预处理$O(n)$，单次查询 $O(log⁡n)$。
 
-下面将详细地介绍“用欧拉序转换为RMQ问题”。
+下面将分别介绍这四种方法。
 
 ## 用欧拉序转换为RMQ问题
 
-温馨提示，若想更好地阅读本文章，你需要掌握一下知识：
+前置知识：
 
 - 可以dfs一棵树
 - 熟知st表
@@ -140,5 +140,76 @@ $dfs$计算欧拉序列：
             printf("%d\n",query_lca(x,y));
         }
         return 0;
+    }
+    ```
+
+## 树链剖分
+
+???+ note "参考代码"
+
+    ```cpp
+    #include<bits/stdc++.h>
+    using namespace std;
+    #define add(x,y) edge[++tail]=(dd){head[x],y};head[x]=tail;
+    int n,m,root_;
+    int head[501010],tail,deep[501010],fa[501010];
+    int son[501010],size_[501010],fir[501010];
+    struct dd{
+        int ne,to;
+    }edge[1002020];
+    inline int read(){
+        int x=0,f=1;
+        char ch=getchar();
+        while(ch<'0'||ch>'9'){
+            if(ch=='-')f=-1;
+            ch=getchar();
+        }
+        while (ch>='0'&&ch<='9'){
+            x=x*10+(ch^48);
+            ch=getchar();
+        }
+        return f*x;
+    }
+    void dfs1(int t,int faa,int depth){
+        deep[t]=depth;
+        fa[t]=faa;
+        size_[t]=1;
+        for(int i=head[t];i;i=edge[i].ne){
+            int to=edge[i].to;
+            if(to==faa)continue;
+            dfs1(to,t,depth+1);
+            size_[t]+=size_[to];
+            if(size_[to]>size_[son[t]])son[t]=to;
+        }
+    }
+    void dfs2(int t,int fir_){
+        fir[t]=fir_;
+        if(!son[t])return;
+        dfs2(son[t],fir_);
+        for(int i=head[t];i;i=edge[i].ne){
+            if(!fir[edge[i].to]){
+                dfs2(edge[i].to,edge[i].to);
+            }
+        }
+    }
+    inline int lca(int x,int y){
+        while(fir[x]!=fir[y]){
+            if(deep[fir[x]]<deep[fir[y]])swap(x,y);
+            x=fa[fir[x]];
+        }
+        return deep[x]<deep[y]?x:y;
+    }
+    int main(){
+        scanf("%d%d%d",&n,&m,&root_);
+        for(int i=1,x,y;i<n;++i){
+            x=read();y=read();
+            add(x,y);add(y,x);
+        }
+        dfs1(root_,root_,1);
+        dfs2(root_,root_);
+        for(int i=1,x,y;i<=m;++i){
+            x=read();y=read();
+            printf("%d\n",lca(x,y));
+        }
     }
     ```

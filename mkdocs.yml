@@ -1,4 +1,4 @@
-site_name: 算法库
+site_name: There Hello 的算法知识库
 site_url: https://algorithm.therehello.top/
 site_author: There Hello
 
@@ -51,8 +51,17 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
-  - 简介: 
+  - 首页: 
     - index.md
   - 图论: 
+    - 最短路: graph/shortest-path.md
     - 树上问题: 
-      - 最近公共祖先: lca.md
+      - 最近公共祖先: graph/lca.md
+      - 树链剖分: graph/hld.md
+      - 连通性: 
+        - 强连通分量: graph/scc.md
+    - 分层最短路: graph/layered-shortest-path.md
+  - 计算几何:
+    - 扫描线: geometry/scanning.md
+  - 杂项:
+    - 悬线法: misc/hoverline.md
