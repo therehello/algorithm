@@ -61,7 +61,9 @@ nav:
       - 连通性: 
         - 强连通分量: graph/scc.md
     - 分层最短路: graph/layered-shortest-path.md
+    - 差分约束: graph/diff-constraints.md
   - 计算几何:
     - 扫描线: geometry/scanning.md
   - 杂项:
+    - 逆序对: misc/count-inversions.md
     - 悬线法: misc/hoverline.md
