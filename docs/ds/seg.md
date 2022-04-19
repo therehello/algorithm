@@ -1,5 +1,7 @@
 # 线段树
 
+(通用模板线段树实现)[https://blog.therehello.top/Segment_Tree/]
+
 ???+ note "参考代码"
 
     ```cpp
