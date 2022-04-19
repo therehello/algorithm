@@ -53,6 +53,8 @@ extra_javascript:
 nav:
   - 首页: 
     - index.md
+  - 数据结构:
+    - 线段树: ds/seg.md
   - 图论: 
     - 最短路: graph/shortest-path.md
     - 树上问题: 
