@@ -3,43 +3,51 @@
 ## Dijkstra 算法
 
 ???+ note "参考代码"
+
     ```cpp
     #include<bits/stdc++.h>
     using namespace std;
-    struct dd{
-        int ne,to,w;
-    }edge[505050];
-    int n,m,s,head[101001],tail,dis[101001];
-    bool v[101001];
-    #define add(x,y,z) edge[++tail]=(dd){head[x],y,z};head[x]=tail;
-    void dij(){
-        priority_queue<pair<int,int>,vector<pair<int,int> >,greater<pair<int,int> > >q;
-        q.push(make_pair(0,s));
-        while(!q.empty()){
-            int x=q.top().second;
-            q.pop();
-            if(v[x])continue;
-            v[x]=1;
-            for(int i=head[x];i;i=edge[i].ne){
-                int diss=dis[x]+edge[i].w;
-                if(dis[edge[i].to]>=diss){
-                    dis[edge[i].to]=diss;
-                    q.push(make_pair(diss,edge[i].to));
+    struct Graph{
+        int n;
+        struct Edge{int to,w;};
+        vector<vector<Edge>> graph;
+        Graph(int _n){n=_n;graph.assign(n+1,vector<Edge>());};
+        void add(int u,int v,int w){graph[u].push_back({v,w});}
+    };
+    void dij(Graph &graph,vector<int> &dis,int t){
+        vector<int> visit(graph.n+1,0);
+        priority_queue<pair<int,int>> que;
+        dis[t]=0;
+        que.emplace(0,t);
+        while(!que.empty()){
+            int u=que.top().second;que.pop();
+            if(visit[u])continue;
+            visit[u]=1;
+            for(auto &[to,w]:graph.graph[u]){
+                if(dis[to]>dis[u]+w){
+                    dis[to]=dis[u]+w;
+                    que.emplace(-dis[to],to);
                 }
             }
         }
     }
-    int main(){
-        scanf("%d%d%d",&n,&m,&s);
-        for(int i=1,x,y,z;i<=m;++i){
-            scanf("%d%d%d",&x,&y,&z);
-            add(x,y,z);
+    void solve(){
+        int n,m,t;
+        cin>>n>>m>>t;
+        Graph g(n);
+        for(int i=1,u,v,w;i<=m;i++){
+            cin>>u>>v>>w;
+            g.add(u,v,w);
         }
-        for(int i=1;i<=n;++i)
-        dis[i]=0x7fffffff;
-        dis[s]=0;
-        dij();
-        for(int i=1;i<=n;++i)
-        printf("%d ",dis[i]);
+        vector<int> dis(n+1,0x3f3f3f3f);
+        dij(g,dis,t);
+        for(int i=1;i<=n;i++)cout<<dis[i]<<" ";
+    }
+    int main(){
+        ios::sync_with_stdio(false);
+        cin.tie(0);cout.tie(0);
+        int t=1;
+        // cin>>t;
+        while(t--)solve();
     }
     ```
